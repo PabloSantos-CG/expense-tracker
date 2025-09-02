@@ -1,0 +1,1 @@
+# Front-end será implementado em Vue.Js com o objetivo de aprender mais sobre o framework
