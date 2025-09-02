@@ -4,7 +4,7 @@ Projeto simples para rastrear despesas pessoais, permitindo cadastrar, listar e 
 
 ## Tecnologias
 
-* PHP (Laravel)
+* PHP (Laravel usando Sanctum SPA)
 * MySQL ou PostgreSQL
 * Redis (opcional, para cache)
 * Composer (gerenciador de dependências)
