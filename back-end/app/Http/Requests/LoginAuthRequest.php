@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+
 class LoginAuthRequest extends FormRequest
 {
     /**
@@ -24,7 +25,7 @@ class LoginAuthRequest extends FormRequest
         return [
             'name' => ['required', 'exists:users,name'],
             'email' => ['required', 'email:rfc,dns', 'exists:users,email'],
-            'password' => ['required', 'exists:users,password'],
+            'password' => ['required'],
         ];
     }
 
@@ -42,7 +43,6 @@ class LoginAuthRequest extends FormRequest
             'email.email' => 'Invalid e-mail',
             'email.exists' => 'User not found',
             'password.required' => 'A password is required',
-            'password.exists' => 'User not found',
         ];
     }
 }
