@@ -29,13 +29,6 @@ class UserController extends Controller
     {
         $credentials = $request->only(['name', 'email', 'password']);
 
-        if (!Auth::attempt($credentials)) {
-            return \response()->json([
-                'status' => 'error',
-                'message' => 'invalid credentials',
-            ], 400);
-        }
-
         $user = $this->userService->create($credentials);
 
         return \response()->json([
