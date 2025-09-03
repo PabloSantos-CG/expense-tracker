@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Application\Services\Contracts\UserServiceInterface;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function __construct(
+        public UserServiceInterface $userService
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -21,7 +27,22 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        //
+        $credentials = $request->only(['name', 'email', 'password']);
+
+        if (!Auth::attempt($credentials)) {
+            return \response()->json([
+                'status' => 'error',
+                'message' => 'invalid credentials',
+            ], 400);
+        }
+
+        $user = $this->userService->create($credentials);
+
+        return \response()->json([
+            'status' => 'success',
+            'message' => 'user created',
+            'data' => $user,
+        ], 201);
     }
 
     /**
