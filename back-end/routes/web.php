@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/ping', fn(Request $req) => ["pong" => true]);
 
 Route::post('/user/login', [AuthController::class, 'logIn']);
-Route::post('/user/logout', [AuthController::class, 'logOut'])->middleware('auth');
+Route::post('/user/logout', [AuthController::class, 'logOut']);
 
 Route::middleware('auth')
     ->controller(UserController::class)
