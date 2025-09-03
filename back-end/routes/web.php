@@ -12,11 +12,12 @@ Route::get('/ping', fn(Request $req) => ["pong" => true]);
 Route::post('/user/login', [AuthController::class, 'logIn']);
 Route::post('/user/logout', [AuthController::class, 'logOut']);
 
+Route::post('/user', [UserController::class, 'store']);
+
 Route::middleware('auth')
     ->controller(UserController::class)
     ->group(function () {
         Route::get('/users', 'index');
-        Route::post('/user', 'store');
         Route::get('/user/{id}', 'show');
         Route::put('/user/{id}', 'update');
         Route::delete('/user/{id}', 'destroy');
