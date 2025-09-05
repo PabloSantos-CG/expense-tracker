@@ -23,7 +23,6 @@ class LoginAuthRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'exists:users,name'],
             'email' => ['required', 'email:rfc,dns', 'exists:users,email'],
             'password' => ['required'],
         ];
@@ -37,8 +36,6 @@ class LoginAuthRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'A name is required',
-            'name.exists' => 'User not found',
             'email.required' => 'A e-mail is required',
             'email.email' => 'Invalid e-mail',
             'email.exists' => 'User not found',

@@ -11,21 +11,21 @@ class AuthController extends Controller
 
     public function logIn(LoginAuthRequest $request)
     {
-        $credentials = $request->only(['name', 'email', 'password']);
+        $credentials = $request->only(['email', 'password']);
 
-        if (!Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
             return \response()->json([
-                'status' => 'error',
-                'message' => 'login failed',
-            ], 401);
+                'status' => 'success',
+                'message' => 'logged in user',
+            ]);
         }
 
-        $request->session()->regenerate();
-
         return \response()->json([
-            'status' => 'success',
-            'message' => 'logged in user',
-        ]);
+            'status' => 'error',
+            'message' => 'login failed',
+        ], 401);
     }
 
     public function logOut(LogoutAuthRequest $request)
