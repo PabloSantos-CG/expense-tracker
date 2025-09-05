@@ -14,8 +14,6 @@ Route::get('/ping', fn(Request $req) => ["pong" => true]);
 Route::post('/user/login', [AuthController::class, 'logIn']);
 Route::post('/user/logout', [AuthController::class, 'logOut']);
 
-Route::post('/user', [UserController::class, 'store']);
-
 Route::middleware(['auth', CheckAdmin::class])
     ->controller(AdminController::class)
     ->group(function () {
@@ -29,13 +27,14 @@ Route::middleware(['auth', CheckAdmin::class])
         Route::delete('/admin/user/{id}', 'destroyUser');
     });
 
+Route::post('/user/create-account', [UserController::class, 'store']);
+
 Route::middleware('auth')
     ->controller(UserController::class)
     ->group(function () {
-        // adicionar política para verificar se ta pegando informação dele mesmo
-        Route::get('/user/{id}', 'show');
-        Route::put('/user/{id}', 'update');
-        Route::delete('/user/{id}', 'destroy');
+        Route::get('/user', 'show');
+        Route::put('/user', 'update');
+        Route::delete('/user', 'destroy');
     });
 
 Route::middleware('auth')
