@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Application\Expense\Contracts\ExpenseServiceInterface;
 use App\Http\Requests\StoreExpenseRequest;
 use App\Http\Requests\UpdateExpenseRequest;
 use App\Models\Expense;
 
 class ExpenseController extends Controller
 {
+    public function __construct(
+        private ExpenseServiceInterface $expenseService,
+    ) {}
+
     /**
      * Display a listing of the resource.
      */

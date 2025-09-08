@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Application\Category\Contracts\CategoryServiceInterface;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 
 class CategoryController extends Controller
 {
+    public function __construct(
+        private CategoryServiceInterface $categoryService,
+    ) {}
+
     /**
      * Display a listing of the resource.
      */

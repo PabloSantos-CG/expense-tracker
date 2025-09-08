@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Application\Auth\Contracts\AuthServiceInterface;
 use App\Http\Requests\LoginAuthRequest;
 use App\Http\Requests\LogoutAuthRequest;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    
+    public function __construct(
+        private AuthServiceInterface $authService,
+    ) {}
 
     public function logIn(LoginAuthRequest $request)
     {
