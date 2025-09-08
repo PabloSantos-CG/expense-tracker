@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Application\Admin\Contracts\AdminProfileServiceInterface;
-
+use App\Http\Requests\UpdateAdminProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 
 class AdminProfileController extends Controller
 {
@@ -14,8 +15,7 @@ class AdminProfileController extends Controller
 
     public function __construct(
         private AdminProfileServiceInterface $adminProfileService,
-    )
-    {
+    ) {
         $this->loggedUser = Auth::user();
     }
 
@@ -33,9 +33,15 @@ class AdminProfileController extends Controller
     /**
      * Atualiza informações do perfil do admin.
      */
-    public function updateProfile()
+    public function updateProfile(UpdateAdminProfileRequest $request)
     {
-        //
+        $attributes = $request->validated();
+        $this->loggedUser->update($attributes);
+
+        return \response()->json([
+            'status' => 'success',
+            'data' => $this->loggedUser
+        ]);
     }
 
     /**
