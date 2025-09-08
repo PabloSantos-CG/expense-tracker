@@ -6,21 +6,14 @@ use App\Application\Services\Contracts\UserServiceInterface;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
+    
     public function __construct(
         public UserServiceInterface $userService
     ) {}
-
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -59,6 +52,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        // Só vai deletar se o usuário autenticado for igual ao usuário solicitado para delete
+
+        
     }
 }
