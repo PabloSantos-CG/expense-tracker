@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Application\Admin\Contracts\AdminProfileServiceInterface;
 use App\Http\Requests\UpdateAdminProfileRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -13,9 +11,8 @@ class AdminProfileController extends Controller
 {
     protected User $loggedUser;
 
-    public function __construct(
-        private AdminProfileServiceInterface $adminProfileService,
-    ) {
+    public function __construct()
+    {
         $this->loggedUser = Auth::user();
     }
 
@@ -36,7 +33,14 @@ class AdminProfileController extends Controller
     public function updateProfile(UpdateAdminProfileRequest $request)
     {
         $attributes = $request->validated();
-        $this->loggedUser->update($attributes);
+
+        $user = $this->loggedUser;
+
+        foreach ($attributes as $key => $value) {
+            if ($user[$key] !== $value) $user[$key] = $value;
+        }
+
+        if ($user->isDirty()) $user->save();
 
         return \response()->json([
             'status' => 'success',
