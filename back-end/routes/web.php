@@ -11,8 +11,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/ping', fn(Request $req) => ["pong" => true]);
 
-Route::post('/user/login', [AuthController::class, 'logIn']);
-Route::post('/user/logout', [AuthController::class, 'logOut']);
+Route::post('/users/login', [AuthController::class, 'logIn']);
+Route::post('/users/logout', [AuthController::class, 'logOut']);
 
 Route::middleware(['auth', CheckAdmin::class])
     ->controller(AdminController::class)
@@ -22,37 +22,36 @@ Route::middleware(['auth', CheckAdmin::class])
         Route::delete('/admin/profile', 'destroyAccount');
 
         Route::get('/admin/users', 'index');
-        Route::get('/admin/user/{id}', 'showUser');
-        Route::put('/admin/user/{id}/make-admin', 'makeAdmin');
-        Route::delete('/admin/user/{id}', 'destroyUser');
+        Route::get('/admin/users/{id}', 'showUser');
+        Route::put('/admin/users/{id}', 'makeAdmin');
+        Route::delete('/admin/users/{id}', 'destroyUser');
     });
-
-Route::post('/user/create-account', [UserController::class, 'store']);
 
 Route::middleware('auth')
     ->controller(UserController::class)
     ->group(function () {
-        Route::get('/user', 'show');
-        Route::put('/user', 'update');
-        Route::delete('/user', 'destroy');
+        Route::get('/users', 'show');
+        Route::put('/users', 'update');
+        Route::delete('/users', 'destroy');
     });
+Route::post('/users', [UserController::class, 'store']);
 
 Route::middleware('auth')
     ->controller(CategoryController::class)
     ->group(function () {
         Route::get('/categories', 'index');
-        Route::post('/category', 'store');
-        Route::get('/category/{id}', 'show');
-        Route::put('/category/{id}', 'update');
-        Route::delete('/category/{id}', 'destroy');
+        Route::post('/categories', 'store');
+        Route::get('/categories/{id}', 'show');
+        Route::put('/categories/{id}', 'update');
+        Route::delete('/categories/{id}', 'destroy');
     });
 
 Route::middleware('auth')
     ->controller(ExpenseController::class)
     ->group(function () {
-        Route::get('/category/expenses', 'index');
-        Route::post('/category/expense', 'store');
-        Route::get('/category/expense/{id}', 'show');
-        Route::put('/category/expense/{id}', 'update');
-        Route::delete('/category/expense/{id}', 'destroy');
+        Route::get('/categories/expenses', 'index');
+        Route::post('/categories/expenses', 'store');
+        Route::get('/categories/expenses/{id}', 'show');
+        Route::put('/categories/expenses/{id}', 'update');
+        Route::delete('/categories/expenses/{id}', 'destroy');
     });
