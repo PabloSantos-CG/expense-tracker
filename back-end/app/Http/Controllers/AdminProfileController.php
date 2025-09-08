@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Application\Admin\Contracts\AdminProfileServiceInterface;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,8 @@ class AdminProfileController extends Controller
 
     public function __construct(
         private AdminProfileServiceInterface $adminProfileService,
-    ) {
+    )
+    {
         $this->loggedUser = Auth::user();
     }
 
@@ -22,7 +24,10 @@ class AdminProfileController extends Controller
      */
     public function showProfile()
     {
-        //
+        return \response()->json([
+            'status' => 'success',
+            'data' => $this->loggedUser,
+        ]);
     }
 
     /**
