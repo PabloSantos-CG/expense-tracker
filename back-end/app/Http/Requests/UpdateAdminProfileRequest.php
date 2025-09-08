@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\Validator;
 
 class UpdateAdminProfileRequest extends FormRequest
@@ -65,7 +65,11 @@ class UpdateAdminProfileRequest extends FormRequest
     {
         return [
             function (Validator $validator) {
-                if ($this->missing(['name', 'password', 'email'])) {
+                if (
+                    $this->missing('name') &&
+                    $this->missing('email') &&
+                    $this->missing('password')
+                ) {
                     $validator->errors()->add(
                         'empty',
                         'É necessário enviar pelo menos um campo.'
