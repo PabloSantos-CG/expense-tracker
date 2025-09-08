@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ExpenseController;
@@ -15,12 +16,16 @@ Route::post('/users/login', [AuthController::class, 'logIn']);
 Route::post('/users/logout', [AuthController::class, 'logOut']);
 
 Route::middleware(['auth', CheckAdmin::class])
-    ->controller(AdminController::class)
+    ->controller(AdminProfileController::class)
     ->group(function () {
         Route::get('/admin/profile', 'showProfile');
         Route::put('/admin/profile', 'updateProfile');
         Route::delete('/admin/profile', 'destroyAccount');
+    });
 
+Route::middleware(['auth', CheckAdmin::class])
+    ->controller(AdminController::class)
+    ->group(function () {
         Route::get('/admin/users', 'index');
         Route::get('/admin/users/{id}', 'showUser');
         Route::put('/admin/users/{id}', 'makeAdmin');

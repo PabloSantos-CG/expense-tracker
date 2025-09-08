@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class AdminProfileController extends Controller
+{
+    protected User $loggedUser;
+
+    public function __construct()
+    {
+        $this->loggedUser = Auth::user();
+    }
+
+    /**
+     * Mostra informações do perfil do admin.
+     */
+    public function showProfile()
+    {
+        //
+    }
+
+    /**
+     * Atualiza informações do perfil do admin.
+     */
+    public function updateProfile()
+    {
+        //
+    }
+
+    /**
+     * Softdelete na conta do admin logado.
+     */
+    public function destroyAccount()
+    {
+        //
+    }
+}
