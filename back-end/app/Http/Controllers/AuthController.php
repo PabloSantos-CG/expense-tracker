@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Application\Auth\Contracts\AuthServiceInterface;
 use App\Application\Auth\Contracts\LoginServiceInterface;
 use App\Application\Auth\Contracts\LogoutServiceInterface;
 use App\Http\Requests\LoginAuthRequest;
 use App\Http\Requests\LogoutAuthRequest;
-use Illuminate\Support\Facades\Auth;
+
 
 class AuthController extends Controller
 {
