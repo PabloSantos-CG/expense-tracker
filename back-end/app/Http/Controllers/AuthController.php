@@ -18,9 +18,9 @@ class AuthController extends Controller
     public function logIn(LoginAuthRequest $request)
     {
         $credentials = $request->only(['email', 'password']);
-        $isLoggedIn = $this->loginService->execute($credentials);
+        $loginSuccess = $this->loginService->execute($credentials);
 
-        if (!$isLoggedIn) {
+        if (!$loginSuccess) {
             return \response()->json([
                 'status' => 'error',
                 'message' => 'login failed',
