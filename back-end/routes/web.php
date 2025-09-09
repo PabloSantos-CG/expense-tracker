@@ -29,7 +29,7 @@ Route::middleware(['auth', CheckAdmin::class])
         Route::get('/admin/users', 'index');
         Route::get('/admin/users/{user}', 'showUser')->withTrashed();
         Route::put('/admin/users/{user}', 'toggleAdmin');
-        Route::delete('/admin/users/{user}', 'destroyUser');
+        Route::delete('/admin/users/{user}', 'destroyUser')->withTrashed();
     });
 
 Route::middleware('auth')
