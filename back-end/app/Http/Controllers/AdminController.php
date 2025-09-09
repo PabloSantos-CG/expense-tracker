@@ -65,6 +65,13 @@ class AdminController extends Controller
             $user->delete();
         }
 
-        return \response()->json(status: 204);
+        return \response()->noContent();
+    }
+
+    public function recoverDeletedUser(User $user)
+    {
+        if ($user->trashed()) $user->restore();
+
+        return \response()->noContent();
     }
 }

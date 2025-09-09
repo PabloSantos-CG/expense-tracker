@@ -28,8 +28,10 @@ Route::middleware(['auth', CheckAdmin::class])
     ->group(function () {
         Route::get('/admin/users', 'index');
         Route::get('/admin/users/{user}', 'showUser')->withTrashed();
-        Route::put('/admin/users/{user}', 'toggleAdmin');
+        Route::put('/admin/users/{user}/toggle-admin', 'toggleAdmin');
         Route::delete('/admin/users/{user}', 'destroyUser')->withTrashed();
+        Route::put('/admin/users/{user}/recover-deleted', 'recoverDeletedUser')
+            ->withTrashed();
     });
 
 Route::middleware('auth')
