@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Application\Admin\Contracts\AdminServiceInterface;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,7 +10,6 @@ class AdminController extends Controller
     protected User $loggedUser;
 
     public function __construct(
-        private AdminServiceInterface $adminService,
     ) {
         $this->loggedUser = Auth::user();
     }
