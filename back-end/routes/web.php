@@ -28,8 +28,8 @@ Route::middleware(['auth', CheckAdmin::class])
     ->group(function () {
         Route::get('/admin/users', 'index');
         Route::get('/admin/users/{user}', 'showUser')->withTrashed();
-        Route::put('/admin/users/{id}', 'makeAdmin');
-        Route::delete('/admin/users/{id}', 'destroyUser');
+        Route::put('/admin/users/{user}', 'makeAdmin');
+        Route::delete('/admin/users/{user}', 'destroyUser');
     });
 
 Route::middleware('auth')
@@ -46,9 +46,9 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/categories', 'index');
         Route::post('/categories', 'store');
-        Route::get('/categories/{id}', 'show');
-        Route::put('/categories/{id}', 'update');
-        Route::delete('/categories/{id}', 'destroy');
+        Route::get('/categories/{category}', 'show');
+        Route::put('/categories/{category}', 'update');
+        Route::delete('/categories/{category}', 'destroy');
     });
 
 Route::middleware('auth')
@@ -56,7 +56,7 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/categories/expenses', 'index');
         Route::post('/categories/expenses', 'store');
-        Route::get('/categories/expenses/{id}', 'show');
-        Route::put('/categories/expenses/{id}', 'update');
-        Route::delete('/categories/expenses/{id}', 'destroy');
+        Route::get('/categories/expenses/{expense}', 'show');
+        Route::put('/categories/expenses/{expense}', 'update');
+        Route::delete('/categories/expenses/{expense}', 'destroy');
     });
