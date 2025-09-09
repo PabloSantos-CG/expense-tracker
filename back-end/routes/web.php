@@ -27,7 +27,7 @@ Route::middleware(['auth', CheckAdmin::class])
     ->controller(AdminController::class)
     ->group(function () {
         Route::get('/admin/users', 'index');
-        Route::get('/admin/users/{id}', 'showUser');
+        Route::get('/admin/users/{user}', 'showUser')->withTrashed();
         Route::put('/admin/users/{id}', 'makeAdmin');
         Route::delete('/admin/users/{id}', 'destroyUser');
     });
