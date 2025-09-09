@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UpdateAdminProfileRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -51,8 +52,13 @@ class AdminProfileController extends Controller
     /**
      * Softdelete na conta do admin logado.
      */
-    public function destroyAccount()
+    public function destroyAccount(Request $request)
     {
-        //
+        $this->loggedUser->delete();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return \response(status: 204);
     }
 }
