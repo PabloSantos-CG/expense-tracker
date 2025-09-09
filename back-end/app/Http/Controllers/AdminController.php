@@ -21,7 +21,12 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::withTrashed()->get();
+
+        return \response()->json([
+            'status' => 'success',
+            'data' => $users
+        ]);
     }
 
     /**
