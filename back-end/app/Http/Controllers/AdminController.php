@@ -34,7 +34,10 @@ class AdminController extends Controller
      */
     public function showUser(User $user)
     {
-        //
+        return \response()->json([
+            'status' => 'success',
+            'data' => $user,
+        ]);
     }
 
     /**
