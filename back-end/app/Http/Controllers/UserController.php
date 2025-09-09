@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Application\Services\Contracts\UserServiceInterface;
+use App\Application\User\Contracts\UserServiceInterface;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    
-    public function __construct(
-        private UserServiceInterface $userService
-    ) {}
+    protected User $loggedUser;
+
+    public function __construct()
+    {
+        $this->loggedUser = Auth::user();
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -22,7 +25,8 @@ class UserController extends Controller
     {
         $credentials = $request->only(['name', 'email', 'password']);
 
-        $user = $this->userService->create($credentials);
+        $user = new User($credentials);
+        $user->save();
 
         return \response()->json([
             'status' => 'success',
@@ -34,26 +38,45 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show()
     {
-        //
+        return \response()->json([
+            'status' => 'success',
+            'data' => $this->loggedUser,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUserRequest $request)
     {
-        //
+        $attributes = $request->validated();
+
+        $user = $this->loggedUser;
+
+        foreach ($attributes as $key => $value) {
+            if ($user[$key] !== $value) $user[$key] = $value;
+        }
+
+        if ($user->isDirty()) $user->save();
+
+        return \response()->json([
+            'status' => 'success',
+            'data' => $this->loggedUser
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy(Request $request)
     {
-        // Só vai deletar se o usuário autenticado for igual ao usuário solicitado para delete
+        $this->loggedUser->delete();
 
-        
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return \response()->noContent();
     }
 }
