@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ExpenseController;
@@ -15,12 +14,14 @@ Route::get('/ping', fn(Request $req) => ["pong" => true]);
 Route::post('/users/login', [AuthController::class, 'logIn']);
 Route::post('/users/logout', [AuthController::class, 'logOut']);
 
-Route::middleware(['auth', CheckAdmin::class])
-    ->controller(AdminProfileController::class)
+Route::post('/users', [UserController::class, 'store']);
+
+Route::middleware('auth')
+    ->controller(UserController::class)
     ->group(function () {
-        Route::get('/admin/profile', 'showProfile');
-        Route::put('/admin/profile', 'updateProfile');
-        Route::delete('/admin/profile', 'destroyAccount');
+        Route::get('/users/profile', 'show');
+        Route::put('/users/profile', 'update');
+        Route::delete('/users/profile', 'destroy');
     });
 
 Route::middleware(['auth', CheckAdmin::class])
@@ -33,15 +34,6 @@ Route::middleware(['auth', CheckAdmin::class])
         Route::put('/admin/users/{user}/recover', 'recoverDeletedUser')
             ->withTrashed();
     });
-
-Route::middleware('auth')
-    ->controller(UserController::class)
-    ->group(function () {
-        Route::get('/users', 'show');
-        Route::put('/users', 'update');
-        Route::delete('/users', 'destroy');
-    });
-Route::post('/users', [UserController::class, 'store']);
 
 Route::middleware('auth')
     ->controller(CategoryController::class)
