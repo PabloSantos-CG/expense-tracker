@@ -59,6 +59,12 @@ class AdminController extends Controller
      */
     public function destroyUser(User $user)
     {
-        //
+        if ($user->trashed()) {
+            $user->forceDelete();
+        } else {
+            $user->delete();
+        }
+
+        return \response()->json(status: 204);
     }
 }
