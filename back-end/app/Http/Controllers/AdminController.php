@@ -43,9 +43,15 @@ class AdminController extends Controller
     /**
      * Marca o atributo is_admin como TRUE, tornando o usuário um admin.
      */
-    public function makeAdmin(User $user)
+    public function toggleAdmin(User $user)
     {
-        //
+        $user->is_admin = !$user->is_admin;
+        $user->save();
+
+        return \response()->json([
+            'status' => 'success',
+            'data' => $user,
+        ]);
     }
 
     /**
