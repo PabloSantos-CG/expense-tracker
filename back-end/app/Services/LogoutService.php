@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application\Auth\Services;
+namespace App\Services;
 
-use App\Application\Auth\Contracts\LogoutServiceInterface;
+use App\Services\Contracts\LogoutServiceInterface;
 use Illuminate\Support\Facades\Auth;
 
 class LogoutService implements LogoutServiceInterface

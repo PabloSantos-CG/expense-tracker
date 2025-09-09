@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\Auth\Contracts;
+namespace App\Services\Contracts;
 
 interface LogoutServiceInterface
 {

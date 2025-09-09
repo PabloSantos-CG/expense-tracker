@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application\Auth\Services;
+namespace App\Services;
 
-use App\Application\Auth\Contracts\LoginServiceInterface;
+use App\Services\Contracts\LoginServiceInterface;
 use Illuminate\Support\Facades\Auth;
 
 class LoginService implements LoginServiceInterface
