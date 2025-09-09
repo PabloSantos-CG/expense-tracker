@@ -59,6 +59,6 @@ class AdminProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return \response(status: 204);
+        return \response()->noContent();
     }
 }
