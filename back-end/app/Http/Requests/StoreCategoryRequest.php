@@ -23,7 +23,7 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
+            'title' => ['required', 'string', 'max:255', 'unique:categories'],
             'is_global' => [
                 Auth::user()->is_admin ? 'boolean' : 'prohibited'
             ],
@@ -41,6 +41,7 @@ class StoreCategoryRequest extends FormRequest
             'title.required' => 'O título não pode ser nulo.',
             'title.string' => 'O título deve ser uma string.',
             'title.max' => 'O título não pode ser maior do que 255 caracteres.',
+            'title.unique' => 'O título já existe.',
             'is_global.prohibited' => 'Unauthorized!',
             'is_global.boolean' => 'O atributo deve ser um booleano.'
         ];
