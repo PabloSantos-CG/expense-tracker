@@ -20,12 +20,12 @@ return new class extends Migration
             $table->softDeletes();
             $table->foreignIdFor(User::class)
                 ->constrained()
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->foreignIdFor(Category::class)
                 ->constrained()
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->cascadeOnUpdate()
+                ->restrictOnDelete();
             $table->timestamps();
         });
     }
