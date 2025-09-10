@@ -5,17 +5,31 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
-    public function __construct() {}
+    protected User $loggedUser;
+
+    public function __construct()
+    {
+        $this->loggedUser = Auth::user();
+    }
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // deve retornar todas as categorias
+        $categories = Category::where('is_global', true)
+            ->orWhere('user_id', $this->loggedUser['id'])
+            ->get();
+
+        return \response()->json([
+            'status' => 'success',
+            'data' => $categories
+        ]);
     }
 
     /**
