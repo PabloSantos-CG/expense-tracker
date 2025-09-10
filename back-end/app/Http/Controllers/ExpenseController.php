@@ -5,9 +5,18 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreExpenseRequest;
 use App\Http\Requests\UpdateExpenseRequest;
 use App\Models\Expense;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class ExpenseController extends Controller
 {
+    protected User $loggedUser;
+
+    public function __construct()
+    {
+        $this->loggedUser = Auth::user();
+    }
+
     /**
      * Display a listing of the resource.
      */
