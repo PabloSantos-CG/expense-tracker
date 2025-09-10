@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        // deve retornar todas as categorias
     }
 
     /**

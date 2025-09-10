@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
+use App\Models\Expense;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,7 +22,14 @@ class DatabaseSeeder extends Seeder
             'is_admin' => true,
             'password' => Hash::make('Admin@123'),
         ]);
+        Category::factory()->create([
+            'title' => 'Insumos',
+            'is_global' => false,
+            'user_id' => User::factory(),
+        ]);
 
         User::factory(10)->create();
+        Category::factory(4)->create();
+        Expense::factory(4)->create();
     }
 }
