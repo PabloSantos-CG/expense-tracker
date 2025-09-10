@@ -13,4 +13,16 @@ class Category extends Model
     public function expenses(): HasMany {
         return $this->hasMany(Expense::class);
     }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'is_global' => 'boolean',
+        ];
+    }
 }
