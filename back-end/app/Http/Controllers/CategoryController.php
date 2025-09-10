@@ -37,7 +37,20 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        $category = new Category();
+        $category->title = $request->input('title');
+
+        if ($request->filled('is_global')) {
+            $category->is_global = $request->input('is_global');
+        }
+
+        $category->user_id = $this->loggedUser['id'];
+        $category->save();
+
+        return \response()->json([
+            'status' => 'success',
+            'data' => $category,
+        ], 201);
     }
 
     /**
