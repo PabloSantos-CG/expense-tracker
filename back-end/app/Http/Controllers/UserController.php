@@ -23,9 +23,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $credentials = $request->only(['name', 'email', 'password']);
-
-        $user = new User($credentials);
-        $user->save();
+        $user = User::create($credentials);
 
         return \response()->json([
             'status' => 'success',
