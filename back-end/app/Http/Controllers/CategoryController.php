@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Models\User;
+// use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
@@ -58,7 +59,16 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        $category->load([
+            'expenses' => function ($query) {
+                $query->where('user_id', $this->loggedUser['id']);
+            }
+        ]);
+
+        return \response()->json([
+            'status' => 'success',
+            'data' => $category
+        ]);
     }
 
     /**
