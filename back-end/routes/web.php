@@ -40,7 +40,8 @@ Route::middleware('auth')
     ->group(function () {
         Route::get('/categories', 'index');
         Route::post('/categories', 'store');
-        Route::get('/categories/{category}/expenses', 'show');
+        Route::get('/categories/{category}/expenses', 'show')
+            ->can('view', 'category');
         Route::put('/categories/{category}', 'update');
         Route::delete('/categories/{category}', 'destroy');
     });
