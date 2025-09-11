@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreExpenseRequest;
 use App\Http\Requests\UpdateExpenseRequest;
+use App\Models\Category;
 use App\Models\Expense;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -28,9 +29,22 @@ class ExpenseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreExpenseRequest $request)
+    public function store(StoreExpenseRequest $request, Category $category)
     {
-        //
+        /** 
+         * @var array{name: string, value: int|float} $attributes 
+         */
+        $attributes = $request->validated();
+        $attributes['user_id'] = $this->loggedUser['id'];
+        $attributes['category_id'] = $category->id;
+
+        $expense = Expense::create($attributes);
+
+        return \response()->json([
+            'status' => 'success',
+            'message' => 'expense created',
+            'data' => $expense,
+        ], 201);
     }
 
     /**
