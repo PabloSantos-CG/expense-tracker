@@ -50,6 +50,13 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request)
     {
+        /** 
+         * @var array{
+         * name?: string, 
+         * email?: string, 
+         * password?: string
+         * } $attributes 
+         */
         $attributes = $request->validated();
 
         $user = $this->loggedUser;
