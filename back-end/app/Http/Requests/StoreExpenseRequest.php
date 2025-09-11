@@ -11,7 +11,7 @@ class StoreExpenseRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,24 @@ class StoreExpenseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'string', 'max:255'],
+            'value' => ['required', 'numeric', 'min:0'],
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'O nome não pode ser nulo.',
+            'name.string' => 'O nome deve ser uma string.',
+            'value.required' => 'O valor não pode ser nulo.',
+            'value.min' => 'O valor deve ser maior ou igual a zero.',
+            'value.numeric' => 'O valor deve ser um tipo numérico válido.',
         ];
     }
 }
