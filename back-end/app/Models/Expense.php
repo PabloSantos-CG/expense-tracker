@@ -12,13 +12,25 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 #[UsePolicy(ExpensePolicy::class)]
 class Expense extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
+    protected $fillable = [
+        'name',
+        'value',
+    ];
+
     use SoftDeletes, HasFactory;
 
-    public function user(): BelongsTo {
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function category(): BelongsTo {
+    public function category(): BelongsTo
+    {
         return $this->belongsTo(Category::class);
     }
 }
