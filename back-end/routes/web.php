@@ -50,8 +50,10 @@ Route::middleware('auth')
     ->controller(ExpenseController::class)
     ->group(function () {
         Route::get('/categories/expenses', 'index');
-        Route::post('/categories/expenses', 'store');
+        // adicionar policy
+        Route::post('/categories/{category}/expenses', 'store');
         Route::get('/categories/expenses/{expense}', 'show');
-        Route::put('/categories/expenses/{expense}', 'update');
+        // adicionar policy
+        Route::put('/categories/{category}/expenses/{expense}', 'update');
         Route::delete('/categories/expenses/{expense}', 'destroy');
     });
