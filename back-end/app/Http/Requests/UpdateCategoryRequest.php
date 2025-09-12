@@ -11,7 +11,7 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,21 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['required', 'string', 'max:255']
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'O título não pode ser nulo.',
+            'title.string' => 'O título deve ser uma string.',
+            'title.max' => 'O título não pode ter mais de 255 caracteres.',
         ];
     }
 }
