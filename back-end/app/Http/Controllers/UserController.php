@@ -30,7 +30,6 @@ class UserController extends Controller
 
         return \response()->json([
             'status' => 'success',
-            'message' => 'user created',
             'data' => $user,
         ], 201);
     }
