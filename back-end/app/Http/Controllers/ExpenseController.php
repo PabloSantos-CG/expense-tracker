@@ -49,17 +49,8 @@ class ExpenseController extends Controller
 
         return \response()->json([
             'status' => 'success',
-            'message' => 'expense created',
             'data' => $expense,
         ], 201);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Expense $expense)
-    {
-        //
     }
 
     /**
@@ -67,7 +58,21 @@ class ExpenseController extends Controller
      */
     public function update(UpdateExpenseRequest $request, Expense $expense)
     {
-        //
+        /** 
+         * @var array{name?: string, value?: int|float} $attributes 
+         */
+        $attributes = $request->validated();
+
+        foreach ($attributes as $key => $value) {
+            if ($expense[$key] !== $value) $expense[$key] = $value;
+        }
+
+        $expense->save();
+
+        return \response()->json([
+            'status' => 'success',
+            'data' => $expense,
+        ]);
     }
 
     /**
