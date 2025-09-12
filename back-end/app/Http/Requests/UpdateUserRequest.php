@@ -72,7 +72,7 @@ class UpdateUserRequest extends FormRequest
                 ) {
                     $validator->errors()->add(
                         'empty',
-                        'É necessário enviar pelo menos um campo.'
+                        'necessário informar pelo menos um atributo.'
                     );
                 }
             }
