@@ -59,8 +59,9 @@ Route::middleware('auth')
         Route::post('/categories/{category}/expenses', 'store')
             ->can('create', [Expense::class, 'category']);
 
-        Route::get('/categories/expenses/{expense}', 'show');
-        // adicionar policy
-        Route::put('/categories/{category}/expenses/{expense}', 'update');
-        Route::delete('/categories/expenses/{expense}', 'destroy');
+        Route::middleware('can:manage,expense')
+            ->group(function () {
+                Route::put('/expenses/{expense}', 'update');
+                Route::delete('/expenses/{expense}', 'destroy');
+            });
     });
