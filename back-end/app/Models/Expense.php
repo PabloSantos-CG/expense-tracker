@@ -20,6 +20,8 @@ class Expense extends Model
     protected $fillable = [
         'name',
         'value',
+        'user_id',
+        'category_id',
     ];
 
     use SoftDeletes, HasFactory;
