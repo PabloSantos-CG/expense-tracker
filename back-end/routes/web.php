@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAdmin;
+use App\Models\Expense;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -52,7 +53,7 @@ Route::middleware('auth')
         Route::get('/categories/expenses', 'index');
         // testar
         Route::post('/categories/{category}/expenses', 'store')
-            ->can('create', 'App\\Models\Expense');
+            ->can('create', [Expense::class, 'category']);
         Route::get('/categories/expenses/{expense}', 'show');
         // adicionar policy
         Route::put('/categories/{category}/expenses/{expense}', 'update');
