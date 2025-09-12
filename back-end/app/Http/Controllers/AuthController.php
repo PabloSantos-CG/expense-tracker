@@ -17,7 +17,10 @@ class AuthController extends Controller
 
     public function logIn(LoginAuthRequest $request)
     {
-        $credentials = $request->only(['email', 'password']);
+        /** 
+         * @var array{email: string, password: string} $credentials 
+         */
+        $credentials = $request->validated();
         $loginSuccess = $this->loginService->execute($credentials);
 
         if (!$loginSuccess) {
