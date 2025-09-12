@@ -80,6 +80,12 @@ class ExpenseController extends Controller
      */
     public function destroy(Expense $expense)
     {
-        //
+        if ($expense->trashed()) {
+            $expense->forceDelete();
+        } else {
+            $expense->delete();
+        }
+
+        return \response()->noContent();
     }
 }
