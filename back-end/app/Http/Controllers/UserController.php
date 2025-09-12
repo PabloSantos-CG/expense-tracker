@@ -22,7 +22,10 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $credentials = $request->only(['name', 'email', 'password']);
+        /** 
+         * @var array{name: string, email: string, password: string} $credentials 
+         */
+        $credentials = $request->validated();
         $user = User::create($credentials);
 
         return \response()->json([
