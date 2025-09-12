@@ -90,6 +90,15 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        if ($category->expenses()->exists()) {
+            return \response()->json([
+                'status' => 'error',
+                'data' => 'cannot delete because there are dependencies'
+            ], 409);
+        }
+
+        $category->delete();
+
+        return \response()->noContent();
     }
 }
