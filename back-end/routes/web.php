@@ -43,15 +43,18 @@ Route::middleware('auth')
         Route::post('/categories', 'store');
         Route::get('/categories/{category}', 'show')
             ->can('view', 'category');
-        Route::put('/categories/{category}', 'update');
-        Route::delete('/categories/{category}', 'destroy');
+
+        Route::middleware('can:manage,category')
+            ->group(function () {
+                Route::put('/categories/{category}', 'update');
+                Route::delete('/categories/{category}', 'destroy');
+            });
     });
 
 Route::middleware('auth')
     ->controller(ExpenseController::class)
     ->group(function () {
         Route::get('/categories/expenses', 'index');
-        // testar
         Route::post('/categories/{category}/expenses', 'store')
             ->can('create', [Expense::class, 'category']);
         Route::get('/categories/expenses/{expense}', 'show');
