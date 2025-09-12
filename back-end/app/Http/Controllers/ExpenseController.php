@@ -23,7 +23,14 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        //
+        $expenses = Expense::where('user_id', $this->loggedUser['id'])
+            ->with('category:id,title')
+            ->get();
+
+        return \response()->json([
+            'status' => 'success',
+            'data' => $expenses,
+        ]);
     }
 
     /**
