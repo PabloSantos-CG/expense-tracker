@@ -54,9 +54,11 @@ Route::middleware('auth')
 Route::middleware('auth')
     ->controller(ExpenseController::class)
     ->group(function () {
-        Route::get('/categories/expenses', 'index');
+        Route::get('/expenses', 'index');
+
         Route::post('/categories/{category}/expenses', 'store')
             ->can('create', [Expense::class, 'category']);
+
         Route::get('/categories/expenses/{expense}', 'show');
         // adicionar policy
         Route::put('/categories/{category}/expenses/{expense}', 'update');
