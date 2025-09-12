@@ -76,7 +76,13 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $category->title = $request->input('title');
+        $category->save();
+
+        return \response()->json([
+            'status' => 'success',
+            'data' => $category
+        ]);
     }
 
     /**
