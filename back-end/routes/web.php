@@ -62,6 +62,6 @@ Route::middleware('auth')
         Route::middleware('can:manage,expense')
             ->group(function () {
                 Route::put('/expenses/{expense}', 'update');
-                Route::delete('/expenses/{expense}', 'destroy');
+                Route::delete('/expenses/{expense}', 'destroy')->withTrashed();
             });
     });
