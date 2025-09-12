@@ -16,43 +16,11 @@ class CategoryPolicy
         return $category->is_global || $category->user_id === $user->id;
     }
 
-    // /**
-    //  * Determine whether the user can create models.
-    //  */
-    // public function create(User $user): bool
-    // {
-    //     return false;
-    // }
-
-    // /**
-    //  * Determine whether the user can update the model.
-    //  */
-    // public function update(User $user, Category $category): bool
-    // {
-    //     return false;
-    // }
-
-    // /**
-    //  * Determine whether the user can delete the model.
-    //  */
-    // public function delete(User $user, Category $category): bool
-    // {
-    //     return false;
-    // }
-
-    // /**
-    //  * Determine whether the user can restore the model.
-    //  */
-    // public function restore(User $user, Category $category): bool
-    // {
-    //     return false;
-    // }
-
-    // /**
-    //  * Determine whether the user can permanently delete the model.
-    //  */
-    // public function forceDelete(User $user, Category $category): bool
-    // {
-    //     return false;
-    // }
+    /**
+     * Determine whether the user can update or delete the model.
+     */
+    public function manage(User $user, Category $category): bool
+    {
+        return !$category->is_global && $category->user_id === $user->id;
+    }
 }
