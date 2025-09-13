@@ -58,14 +58,13 @@ class UserController extends Controller
          * } $attributes 
          */
         $attributes = $request->validated();
-
         $user = $this->loggedUser;
 
         foreach ($attributes as $key => $value) {
             if ($user[$key] !== $value) $user[$key] = $value;
         }
 
-        if ($user->isDirty()) $user->save();
+        $user->save();
 
         return \response()->json([
             'status' => 'success',
