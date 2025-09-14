@@ -23,6 +23,9 @@ Route::middleware('auth')
         Route::get('/users/profile', 'show');
         Route::put('/users/profile', 'update');
         Route::delete('/users/profile', 'destroy');
+
+        Route::post('/users/profile/avatar', 'addProfilePhoto');
+        Route::delete('/users/profile/avatar', 'removeProfilePhoto');
     });
 
 Route::middleware(['auth', CheckAdmin::class])
