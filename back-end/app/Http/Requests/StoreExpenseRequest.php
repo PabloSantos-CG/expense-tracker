@@ -35,11 +35,12 @@ class StoreExpenseRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'O nome não pode ser nulo.',
-            'name.string' => 'O nome deve ser uma string.',
-            'value.required' => 'O valor não pode ser nulo.',
-            'value.min' => 'O valor deve ser maior ou igual a zero.',
-            'value.numeric' => 'O valor deve ser um tipo numérico válido.',
+            'name.required' => 'Name is required',
+            'name.string' => 'The name must be a string.',
+            
+            'value.required' => 'Value is required',
+            'value.min' => 'The value must be greater than or equal to zero.',
+            'value.numeric' => 'The value must be a valid numeric type.',
         ];
     }
 }

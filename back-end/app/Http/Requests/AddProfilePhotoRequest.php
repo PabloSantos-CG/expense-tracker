@@ -34,10 +34,10 @@ class AddProfilePhotoRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'avatar.required' => 'Imagem obrigatória.',
-            'avatar.image' => 'Imagem inválida!',
-            'avatar.mimes' => 'Extensão inválida!',
-            'avatar.image' => 'A imagem deve ter no máximo 2mb.',
+            'avatar.required' => 'Image is required.',
+            'avatar.image' => 'Invalid image!',
+            'avatar.mimes' => 'Invalid file extension!',
+            'avatar.max' => 'The image must be at most 2MB.',
         ];
     }
 }

@@ -36,13 +36,13 @@ class UpdateExpenseRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.filled' => 'O nome não pode ser nulo.',
-            'name.string' => 'O nome deve ser uma string.',
-            'name.max' => 'O nome não pode ter mais de 255 caracteres.',
+            'name.filled' => 'Name cannot be null',
+            'name.string' => 'The name must be a string',
+            'name.max' => 'The name cannot be longer than 255 characters',
 
-            'value.filled' => 'O valor não pode ser nulo.',
-            'value.numeric' => 'O valor deve ser um tipo numérico válido.',
-            'value.min' => 'O valor não pode ser um número negativo.',
+            'value.filled' => 'Value cannot be null',
+            'value.numeric' => 'The value must be a valid numeric type',
+            'value.min' => 'The value cannot be a negative number',
         ];
     }
 

@@ -38,12 +38,13 @@ class StoreCategoryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required' => 'O título não pode ser nulo.',
-            'title.string' => 'O título deve ser uma string.',
-            'title.max' => 'O título não pode ser maior do que 255 caracteres.',
-            'title.unique' => 'O título já existe.',
+            'title.required' => 'Title is required.',
+            'title.string' => 'The title must be a string.',
+            'title.max' => 'The title cannot be longer than 255 characters.',
+            'title.unique' => 'The title already exists.',
+            
             'is_global.prohibited' => 'Unauthorized!',
-            'is_global.boolean' => 'O atributo deve ser um booleano.'
+            'is_global.boolean' => 'The attribute must be a boolean.',
         ];
     }
 }

@@ -46,15 +46,15 @@ class UpdateUserRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.filled' => 'O nome não pode ser nulo.',
-            'name.string' => 'O nome deve ser uma string.',
-            'name.max' => 'O nome não pode ter mais de 255 caracteres.',
+            'name.filled' => 'Name cannot be null',
+            'name.string' => 'The name must be a string',
+            'name.max' => 'The name cannot be longer than 255 characters',
 
-            'email.filled' => 'O e-mail não pode ser nulo.',
-            'email.email' => 'E-mail inválido!',
-            'email.unique' => 'E-mail inválido!',
+            'email.filled' => 'Email cannot be null',
+            'email.email' => 'Invalid email!',
+            'email.unique' => 'Invalid email!',
 
-            'password' => 'Senha inválida!'
+            'password' => 'Invalid password!',
         ];
     }
 

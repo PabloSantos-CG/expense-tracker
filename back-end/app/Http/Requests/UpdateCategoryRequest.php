@@ -34,9 +34,9 @@ class UpdateCategoryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required' => 'O título não pode ser nulo.',
-            'title.string' => 'O título deve ser uma string.',
-            'title.max' => 'O título não pode ter mais de 255 caracteres.',
+            'title.required' => 'Title is required',
+            'title.string' => 'The title must be a string.',
+            'title.max' => 'The title cannot be longer than 255 characters.',
         ];
     }
 }

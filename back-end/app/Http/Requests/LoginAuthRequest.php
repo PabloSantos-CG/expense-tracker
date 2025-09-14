@@ -36,9 +36,10 @@ class LoginAuthRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'email.required' => 'A e-mail is required',
+            'email.required' => 'E-mail is required',
             'email.email' => 'Invalid e-mail',
             'email.exists' => 'User not found',
+            
             'password.required' => 'A password is required',
         ];
     }
