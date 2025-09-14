@@ -109,5 +109,21 @@ class UserController extends Controller
         ]);
     }
 
+    public function removeProfilePhoto()
+    {
+        if (!Storage::exists($this->loggedUser->avatar)) {
+            return \response()->json([
+                'status' => 'error',
+                'message' => 'image not found',
+            ], 404);
+        }
 
+        $isDeleted = Storage::delete($this->loggedUser->avatar);
+        if (!$isDeleted) return \response()->noContent(400);
+
+        $this->loggedUser->avatar = null;
+        $this->loggedUser->save();
+
+        return \response()->noContent();
+    }
 }
