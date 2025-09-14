@@ -19,7 +19,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $users = User::withTrashed()->paginate(10);
+        $users = User::withTrashed()->paginate(6);
 
         return response()->json([
             'status' => 'success',
