@@ -23,7 +23,7 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required'],
+            'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email:rfc,dns', 'unique:users'],
             'password' => [
                 'required',
@@ -33,6 +33,26 @@ class StoreUserRequest extends FormRequest
                     ->numbers()
                     ->symbols(),
             ],
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Name is required.',
+            'name.string' => 'The name must be a string.',
+
+            'email.required' => 'E-mail is required.',
+            'email.email' => 'Invalid email!',
+            'email.unique' => 'Email already exists!',
+
+            'password.required' => 'Password is required.',
+            'password' => 'Invalid password!',
         ];
     }
 }
