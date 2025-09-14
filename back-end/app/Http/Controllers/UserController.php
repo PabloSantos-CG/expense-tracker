@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddProfilePhotoRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -84,4 +86,18 @@ class UserController extends Controller
 
         return \response()->noContent();
     }
+
+    public function addProfilePhoto(AddProfilePhotoRequest $request)
+    {
+        $imagePath = $request->file('avatar')->store('avatars');
+
+        $this->loggedUser->avatar = $imagePath;
+        $this->loggedUser->save();
+
+        return \response()->json([
+            'status' => 'success',
+            'avatar_url' => \asset($imagePath),
+        ]);
+    }
+
 }
