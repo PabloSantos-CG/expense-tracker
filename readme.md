@@ -4,7 +4,7 @@ Este é um projeto fullstack criado para fins de estudo e aperfeiçoamento em de
 
 ## Estrutura do Projeto
 
-- **Back-end:** Laravel (em desenvolvimento)
+- **Back-end:** Laravel
 - **Front-end:** Vue.js (será desenvolvido)
 
 ## Objetivo
