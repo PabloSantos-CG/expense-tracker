@@ -89,7 +89,8 @@ class UserController extends Controller
 
     public function addProfilePhoto(AddProfilePhotoRequest $request)
     {
-        $imagePath = $request->file('avatar')->store('avatars', 'public');
+        // return []
+        $imagePath = $request->file('avatar')->store('avatars');
         if (!$imagePath) return \response()->noContent(400);
 
         if (
