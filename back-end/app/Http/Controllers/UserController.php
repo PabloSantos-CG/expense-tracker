@@ -90,6 +90,15 @@ class UserController extends Controller
     public function addProfilePhoto(AddProfilePhotoRequest $request)
     {
         $imagePath = $request->file('avatar')->store('avatars');
+        if (!$imagePath) return \response()->noContent(400);
+
+        if (
+            $this->loggedUser->avatar &&
+            Storage::exists($this->loggedUser->avatar)
+        ) {
+            Storage::delete($this->loggedUser->avatar);
+            $this->loggedUser->avatar = null;
+        }
 
         $this->loggedUser->avatar = $imagePath;
         $this->loggedUser->save();
@@ -99,5 +108,6 @@ class UserController extends Controller
             'avatar_url' => \asset($imagePath),
         ]);
     }
+
 
 }
