@@ -22,14 +22,23 @@ class DatabaseSeeder extends Seeder
             'is_admin' => true,
             'password' => Hash::make('Admin@123'),
         ]);
+
         Category::factory()->create([
             'title' => 'Insumos',
             'is_global' => false,
             'user_id' => User::factory(),
         ]);
 
+
         User::factory(10)->create();
         Category::factory(4)->create();
         Expense::factory(4)->create();
+        
+        Expense::factory(3)->create([
+            'name' => 'Uber',
+            'value' => fake()->randomFloat(2, 10, 1000),
+            'user_id' => 1,
+            'category_id' => 2
+        ]);
     }
 }
