@@ -112,7 +112,10 @@ class UserController extends Controller
 
     public function removeProfilePhoto()
     {
-        if (!Storage::exists($this->loggedUser->avatar)) {
+        if (
+            !$this->loggedUser->avatar ||
+            !Storage::exists($this->loggedUser->avatar)
+        ) {
             return \response()->json([
                 'status' => 'error',
                 'message' => 'image not found',
