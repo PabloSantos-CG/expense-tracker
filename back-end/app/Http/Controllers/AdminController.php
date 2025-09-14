@@ -9,8 +9,8 @@ class AdminController extends Controller
 {
     protected User $loggedUser;
 
-    public function __construct(
-    ) {
+    public function __construct()
+    {
         $this->loggedUser = Auth::user();
     }
 
@@ -19,11 +19,17 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $users = User::withTrashed()->get();
+        $users = User::withTrashed()->paginate(10);
 
-        return \response()->json([
+        return response()->json([
             'status' => 'success',
-            'data' => $users
+            'current_page' => $users->currentPage(),
+            'per_page' => $users->perPage(),
+            'total' => $users->total(),
+            'last_page' => $users->lastPage(),
+            'prev_page_url' => $users->previousPageUrl(),
+            'next_page_url' => $users->nextPageUrl(),
+            'data' => $users->items(),
         ]);
     }
 
