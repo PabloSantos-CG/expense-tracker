@@ -89,7 +89,7 @@ class UserController extends Controller
 
     public function addProfilePhoto(AddProfilePhotoRequest $request)
     {
-        $imagePath = $request->file('avatar')->store('avatars');
+        $imagePath = $request->file('avatar')->store('avatars', 'public');
         if (!$imagePath) return \response()->noContent(400);
 
         if (
@@ -105,7 +105,7 @@ class UserController extends Controller
 
         return \response()->json([
             'status' => 'success',
-            'avatar_url' => \asset($imagePath),
+            'avatar_url' => \asset('storage/' . $imagePath),
         ]);
     }
 
