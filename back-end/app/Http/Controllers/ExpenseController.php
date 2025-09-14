@@ -25,11 +25,17 @@ class ExpenseController extends Controller
     {
         $expenses = Expense::where('user_id', $this->loggedUser['id'])
             ->with('category:id,title')
-            ->get();
+            ->paginate(8);
 
         return \response()->json([
             'status' => 'success',
-            'data' => $expenses,
+            'current_page' => $expenses->currentPage(),
+            'per_page' => $expenses->perPage(),
+            'total' => $expenses->total(),
+            'last_page' => $expenses->lastPage(),
+            'prev_page_url' => $expenses->previousPageUrl(),
+            'next_page_url' => $expenses->nextPageUrl(),
+            'data' => $expenses->items(),
         ]);
     }
 

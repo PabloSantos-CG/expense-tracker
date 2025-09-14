@@ -25,11 +25,17 @@ class CategoryController extends Controller
     {
         $categories = Category::where('is_global', true)
             ->orWhere('user_id', $this->loggedUser['id'])
-            ->get();
+            ->paginate(8);
 
         return \response()->json([
             'status' => 'success',
-            'data' => $categories
+            'current_page' => $categories->currentPage(),
+            'per_page' => $categories->perPage(),
+            'total' => $categories->total(),
+            'last_page' => $categories->lastPage(),
+            'prev_page_url' => $categories->previousPageUrl(),
+            'next_page_url' => $categories->nextPageUrl(),
+            'data' => $categories->items(),
         ]);
     }
 
