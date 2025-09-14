@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -63,6 +64,11 @@ class UserController extends Controller
         $user = $this->loggedUser;
 
         foreach ($attributes as $key => $value) {
+            if (
+                $key === 'password' &&
+                Hash::check($value, $user[$key])
+            ) continue;
+
             if ($user[$key] !== $value) $user[$key] = $value;
         }
 
